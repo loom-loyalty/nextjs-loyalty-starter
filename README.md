@@ -23,6 +23,17 @@ A Next.js storefront page and shopper chat on [Loom Loyalty](https://loomloyalty
 
 The **Deploy** button asks for the first three. Until they're set, each page shows these steps instead of an error.
 
+The Deploy button saves `LOOM_LOYALTY_API_KEY` as an ordinary (Config) variable, because a Deploy link can't set a variable's type. After the first deploy, make it a **Secret** so nobody on your Vercel team can read it back: in **Settings → Environment Variables**, delete it and add it again with **Type → Secret**, or run:
+
+```bash
+vercel env rm LOOM_LOYALTY_API_KEY production --yes
+vercel env rm LOOM_LOYALTY_API_KEY preview --yes
+vercel env add LOOM_LOYALTY_API_KEY production --sensitive
+vercel env add LOOM_LOYALTY_API_KEY preview --sensitive
+```
+
+Then redeploy.
+
 ### Run locally
 
 ```bash
